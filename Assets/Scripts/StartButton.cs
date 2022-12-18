@@ -11,12 +11,21 @@ public class StartButton : MonoBehaviour
     public Text nextText;
     public static bool seikai;
     //public TimeCounter timeCounter;
+    //正解用の配列
+    public GameObject[] seikaiKannjiArray = new GameObject[4];
+    //for文用
+    int i;
 
     // Start is called before the first frame update
     void Start()
     {
         hanteiImage.SetActive(false);
         seikai = false;
+
+        for (i = 0; i < seikaiKannjiArray.Length; i++)
+        {
+            seikaiKannjiArray[i].SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -29,7 +38,7 @@ public class StartButton : MonoBehaviour
     {
         SceneManager.LoadScene("Main");
     }
-
+    //解答ボタン
     public void AnswerButton()
     {
         if (KanjiManager.hantei)
@@ -38,6 +47,8 @@ public class StartButton : MonoBehaviour
             hanteiImage.SetActive(true);
             seikai = true;
             nextText.text = "次の問題へ";
+            //正解用テキスト表示
+            seikaiKannjiArray[kanjiManager.index].SetActive(true);
             if(kanjiManager.index == 3)
             {
                 nextText.text = "タイトルへ";
@@ -45,12 +56,14 @@ public class StartButton : MonoBehaviour
         }
         Debug.Log("解答ボタン");
     }
-
+    //次へボタン
     public void GiveupButton()
     {
         if (KanjiManager.hantei)
         {
             hanteiImage.SetActive(false);
+            //正解用テキスト非表示
+            seikaiKannjiArray[kanjiManager.index].SetActive(false);
             kanjiManager.index++;
             seikai = false;
             //timeCounter.countdown = 60;
