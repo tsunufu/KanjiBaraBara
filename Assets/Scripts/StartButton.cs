@@ -56,7 +56,7 @@ public class StartButton : MonoBehaviour
             //timeCounter.countdown = 60;
         }
         Debug.Log("答えを見る");
-        if(KanjiManager.hantei == true && kanjiManager.index == 3)
+        if(KanjiManager.hantei == true && kanjiManager.index == 4)
         {
             SceneManager.LoadScene("Start");
         }
