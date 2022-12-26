@@ -12,19 +12,28 @@ public class Question : MonoBehaviour
 
     private Cell cell;
 
+    public TextFieldScript textFieldScript;
+    //判定用テキスト
+    private string answerLabel;
+    public string AnswerLabel => answerLabel;
+
     private void Start()
     {
-      
+        //開始時にも問題読み込み
+        SetQuestion();
     }
-
-    private void SetQuestion()
+    //StartButtonから参照したかったのでpublicに
+    public void SetQuestion()
     {
         //ランダムに一つ漢字を選ぶ
         var str = characters[Random.Range(0, characters.Count)];
+        //判定用
+        answerLabel = str;
         //cellsの数(9回)だけforeachを回してあげて，textにstrの値を代入
         foreach(var c in cells)
         {
             c.SetText(str);
+            c.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         }
         //shuffle
         for (int i = 0; i < 50; i++)
@@ -32,9 +41,11 @@ public class Question : MonoBehaviour
             //ランダムで選ばれたcellを先頭に持ってくるという作業を50回繰り返してシャッフル
             cells[Random.Range(0, cells.Count)].transform.SetAsFirstSibling();
         }
+        Debug.Log(str);
+        
     }
-
-    private void AnswerQuestion()
+    //StartButtonから参照したかったのでpublicに
+    public void AnswerQuestion()
     {
         /*
             foreach(var c in cells)
@@ -64,22 +75,8 @@ public class Question : MonoBehaviour
         Debug.Log("検知");
         //クリックしたセルを正しい位置に移動させる
         cells[i].transform.SetSiblingIndex(i);
+        //セルの色を変更
+        pointerObject.GetComponent<Image>().color = new Color32(154, 205, 50, 255);
 
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SetQuestion();
-        }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            AnswerQuestion();
-        }
-
-        
     }
 }

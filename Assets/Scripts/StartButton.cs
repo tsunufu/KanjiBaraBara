@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class StartButton : MonoBehaviour
 {
-    public KanjiManager kanjiManager;
+    public Question question;
     public GameObject hanteiImage;
+    public TextFieldScript textFieldScript;
     public Text nextText;
     public static bool seikai;
+    //public bool Seikai => seikai;
     //public TimeCounter timeCounter;
     //正解用の配列
     public GameObject[] seikaiKannjiArray = new GameObject[4];
@@ -21,17 +23,6 @@ public class StartButton : MonoBehaviour
     {
         hanteiImage.SetActive(false);
         seikai = false;
-
-        for (i = 0; i < seikaiKannjiArray.Length; i++)
-        {
-            seikaiKannjiArray[i].SetActive(false);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Onclick()
@@ -41,37 +32,40 @@ public class StartButton : MonoBehaviour
     //解答ボタン
     public void AnswerButton()
     {
-        if (KanjiManager.hantei)
+        //正解判定
+        if (textFieldScript.myAnswer == question.AnswerLabel)
+        {
+            Debug.Log("正解");
+            seikai = true;
+        }
+        if (seikai)
         {
             Debug.Log("正解");
             hanteiImage.SetActive(true);
-            seikai = true;
             nextText.text = "次の問題へ";
-            //正解用テキスト表示
-            seikaiKannjiArray[kanjiManager.index].SetActive(true);
-            if(kanjiManager.index == 3)
-            {
-                nextText.text = "タイトルへ";
-            }
+            //解答表示
+            question.AnswerQuestion();
         }
         Debug.Log("解答ボタン");
     }
     //次へボタン
     public void GiveupButton()
     {
-        if (KanjiManager.hantei)
+        if (seikai)
         {
             hanteiImage.SetActive(false);
-            //正解用テキスト非表示
-            seikaiKannjiArray[kanjiManager.index].SetActive(false);
-            kanjiManager.index++;
-            seikai = false;
-            //timeCounter.countdown = 60;
+            //新しい問題に
+            question.SetQuestion();
+            nextText.text = "答えを見る";
         }
-        Debug.Log("答えを見る");
-        if(KanjiManager.hantei == true && kanjiManager.index == 4)
+
+        if (!seikai)
         {
-            SceneManager.LoadScene("Start");
+            //解答表示
+            question.AnswerQuestion();
+            nextText.text = "次の問題へ";
         }
+
+        seikai = false;
     }
 }
