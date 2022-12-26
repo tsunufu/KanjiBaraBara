@@ -32,6 +32,7 @@ public class StartButton : MonoBehaviour
     //解答ボタン
     public void AnswerButton()
     {
+        seikai = false;
         //正解判定
         if (textFieldScript.myAnswer == question.AnswerLabel)
         {
@@ -51,21 +52,25 @@ public class StartButton : MonoBehaviour
     //次へボタン
     public void GiveupButton()
     {
-        if (seikai)
+
+        switch (seikai)
         {
-            hanteiImage.SetActive(false);
-            //新しい問題に
-            question.SetQuestion();
-            nextText.text = "答えを見る";
+            case true:
+                hanteiImage.SetActive(false);
+                //新しい問題に
+                question.SetQuestion();
+                nextText.text = "答えを見る";
+                seikai = false;
+                break;
+
+            case false:
+                //解答表示
+                question.AnswerQuestion();
+                nextText.text = "次の問題へ";
+                seikai = true;
+                break;
+
         }
 
-        if (!seikai)
-        {
-            //解答表示
-            question.AnswerQuestion();
-            nextText.text = "次の問題へ";
-        }
-
-        seikai = false;
     }
 }
