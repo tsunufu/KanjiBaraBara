@@ -17,6 +17,8 @@ public class Question : MonoBehaviour
     private string answerLabel;
     public string AnswerLabel => answerLabel;
 
+    private GameObject cellName;
+
     private void Start()
     {
         //開始時にも問題読み込み
@@ -58,6 +60,7 @@ public class Question : MonoBehaviour
         for(int i = 0; i < 9; i++)
         {
             //SetSiblingIndexで指定したインデックスを指定
+            //0から順番に昇順にソートしているので一度並べた位置が動くことはない
             cells[i].transform.SetSiblingIndex(i);
         }
     }
@@ -67,16 +70,25 @@ public class Question : MonoBehaviour
         //クリックしたゲームオブジェクトを取得
         GameObject pointerObject = (data as PointerEventData).pointerClick;
         Debug.Log(pointerObject.name);
+        //①
         //クリックしたオブジェクトのインデックスをiに代入
         cell = pointerObject.GetComponent<Cell>();
         int i = cell.Index;
-        //Debug.Log(this.cells[i]);
-        Debug.Log(i);
-        Debug.Log("検知");
-        //クリックしたセルを正しい位置に移動させる
-        cells[i].transform.SetSiblingIndex(i);
+        Debug.Log("クリックしたセルのインデックスは" + i);
+        //クリックしたオブジェクトの順番取得
+        Debug.Log("クリックしたセルの現在の順番は " + pointerObject.transform.GetSiblingIndex());
+        int j = pointerObject.transform.GetSiblingIndex();
+        Debug.Log(j);
+        //②移動先のセルの順番取得
+        cellName = GameObject.Find("Cell_" + j);
+        Debug.Log("移動先のセルの名前は" + cellName);
+        Debug.Log("移動先のセルの順序は " + cellName.transform.GetSiblingIndex());
+        int k = cellName.transform.GetSiblingIndex();
+        //③Cell_jを正しい位置に移動(クリックしたセルの位置に正しいオブジェクトを配置)
+        cells[j].transform.SetSiblingIndex(j);
+        //④Cell_iをもともとのCell_jの位置に移動(セルの交換)
+        cells[i].transform.SetSiblingIndex(k);
         //セルの色を変更
-        pointerObject.GetComponent<Image>().color = new Color32(154, 205, 50, 255);
-
+        cells[j].GetComponent<Image>().color = new Color32(154, 205, 50, 255);
     }
 }
