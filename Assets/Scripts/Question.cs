@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.IO;
+using System.Linq;
 
 public class Question : MonoBehaviour
 {
-    private List<string> characters = new List<string>() { "青", "色", "有", "月" };
+    //CSVファイル
+    TextAsset csvFile;
+    //CSVの中身を入れるリスト
+    List<string[]> kannjiDatas = new List<string[]>();
+
+    //private List<string> characters = new List<string>() { "青", "色", "有", "月" };
+
+    private List<string> kannji = new List<string>();
 
     [SerializeField] private List<Cell> cells;
 
@@ -21,6 +30,29 @@ public class Question : MonoBehaviour
 
     private void Start()
     {
+
+        //Resources下のCSV読み込み
+        csvFile = Resources.Load("barabarakannji") as TextAsset;
+        StringReader reader = new StringReader(csvFile.text);
+
+        //","で分割し，１行ずつ読み込み
+        //リストに追加
+        while (reader.Peek() != -1)
+        {
+            //1行ずつ読み込み
+            string line = reader.ReadLine();
+            //","区切りでリストに追加
+            kannjiDatas.Add(line.Split(','));
+        }
+
+        //配列に漢字のデータを追加
+        for(int i= 1; i < kannjiDatas.Count; i++)
+        {
+            kannji.Add(kannjiDatas[i][0]);
+        }
+        //"一"が出力されれば成功
+        Debug.Log(kannji[0]);
+
         //開始時にも問題読み込み
         SetQuestion();
     }
@@ -28,7 +60,7 @@ public class Question : MonoBehaviour
     public void SetQuestion()
     {
         //ランダムに一つ漢字を選ぶ
-        var str = characters[Random.Range(0, characters.Count)];
+        var str = kannji[Random.Range(0, kannji.Count)];
         //判定用
         answerLabel = str;
         //cellsの数(9回)だけforeachを回してあげて，textにstrの値を代入

@@ -14,9 +14,9 @@ public class StartButton : MonoBehaviour
     //public bool Seikai => seikai;
     //public TimeCounter timeCounter;
     //正解用の配列
-    public GameObject[] seikaiKannjiArray = new GameObject[4];
+    //public GameObject[] seikaiKannjiArray = new GameObject[4];
     //for文用
-    int i;
+    //int i;
 
     // Start is called before the first frame update
     void Start()
