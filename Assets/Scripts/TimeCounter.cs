@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TimeCounter : MonoBehaviour
 {
     public float countdown = 60;
-    public StartButton startButton;
+    public ButtonManager buttonManager;
 
     public Text timeText;
 
@@ -28,7 +28,7 @@ public class TimeCounter : MonoBehaviour
             timeText.text = "時間になりました";
         }
 
-        if (StartButton.seikai)
+        if (ButtonManager.seikai)
         {
             timeText.text = "正解！";
             countdown = 60;

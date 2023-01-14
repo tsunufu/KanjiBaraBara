@@ -4,13 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StartButton : MonoBehaviour
+public class ButtonManager : MonoBehaviour
 {
     public Question question;
     public GameObject hanteiImage;
     public TextFieldScript textFieldScript;
     public Text nextText;
     public static bool seikai;
+
+    [SerializeField] private Button AnswerButton;
+
+    [SerializeField] private Button GiveupButton;
     //public bool Seikai => seikai;
     //public TimeCounter timeCounter;
     //正解用の配列
@@ -23,14 +27,18 @@ public class StartButton : MonoBehaviour
     {
         hanteiImage.SetActive(false);
         seikai = false;
+
+        AnswerButton.onClick.AddListener(Answer);
+
+        GiveupButton.onClick.AddListener(Giveup);
     }
 
-    public void Onclick()
-    {
-        SceneManager.LoadScene("Main");
-    }
+    //public void Onclick()
+    //{
+    //    SceneManager.LoadScene("Main");
+    //}
     //解答ボタン
-    public void AnswerButton()
+    public void Answer()
     {
         seikai = false;
         //正解判定
@@ -50,7 +58,7 @@ public class StartButton : MonoBehaviour
         Debug.Log("解答ボタン");
     }
     //次へボタン
-    public void GiveupButton()
+    public void Giveup()
     {
 
         switch (seikai)
@@ -72,5 +80,10 @@ public class StartButton : MonoBehaviour
 
         }
 
+    }
+
+    public void Update()
+    {
+       
     }
 }

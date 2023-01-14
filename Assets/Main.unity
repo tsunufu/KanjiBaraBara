@@ -2252,7 +2252,6 @@ GameObject:
   - component: {fileID: 922923670}
   - component: {fileID: 922923673}
   - component: {fileID: 922923671}
-  - component: {fileID: 922923674}
   - component: {fileID: 922923675}
   - component: {fileID: 922923672}
   m_Layer: 5
@@ -2325,19 +2324,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 922923675}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 922923674}
-        m_TargetAssemblyTypeName: StartButton, Assembly-CSharp
-        m_MethodName: GiveupButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &922923672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2361,27 +2348,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922923669}
   m_CullTransparentMesh: 1
---- !u!114 &922923674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 922923669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12e4da82badfc4a2e9b33dbd822960fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  question: {fileID: 1938476263}
-  hanteiImage: {fileID: 834548450}
-  textFieldScript: {fileID: 1779448364}
-  nextText: {fileID: 1490442994}
-  seikaiKannjiArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &922923675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2447,11 +2413,8 @@ MonoBehaviour:
   hanteiImage: {fileID: 834548450}
   textFieldScript: {fileID: 0}
   nextText: {fileID: 1490442994}
-  seikaiKannjiArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  AnswerButton: {fileID: 1999182352}
+  GiveupButton: {fileID: 922923671}
 --- !u!4 &985905274
 Transform:
   m_ObjectHideFlags: 0
@@ -4047,7 +4010,6 @@ GameObject:
   - component: {fileID: 1999182351}
   - component: {fileID: 1999182354}
   - component: {fileID: 1999182352}
-  - component: {fileID: 1999182355}
   - component: {fileID: 1999182356}
   - component: {fileID: 1999182353}
   m_Layer: 5
@@ -4120,19 +4082,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1999182356}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1999182355}
-        m_TargetAssemblyTypeName: StartButton, Assembly-CSharp
-        m_MethodName: AnswerButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1999182353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4156,27 +4106,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999182350}
   m_CullTransparentMesh: 1
---- !u!114 &1999182355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999182350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12e4da82badfc4a2e9b33dbd822960fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  question: {fileID: 1938476263}
-  hanteiImage: {fileID: 834548450}
-  textFieldScript: {fileID: 1779448364}
-  nextText: {fileID: 1490442994}
-  seikaiKannjiArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &1999182356
 MonoBehaviour:
   m_ObjectHideFlags: 0
