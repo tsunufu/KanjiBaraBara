@@ -1480,7 +1480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdown: 60
-  startButton: {fileID: 985905273}
+  buttonManager: {fileID: 0}
   timeText: {fileID: 1442603990}
 --- !u!4 &528722541
 Transform:
@@ -2409,9 +2409,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e4da82badfc4a2e9b33dbd822960fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  question: {fileID: 0}
+  question: {fileID: 1938476263}
   hanteiImage: {fileID: 834548450}
-  textFieldScript: {fileID: 0}
+  textFieldScript: {fileID: 1779448364}
   nextText: {fileID: 1490442994}
   AnswerButton: {fileID: 1999182352}
   GiveupButton: {fileID: 922923671}
@@ -2928,7 +2928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdown: 60
-  startButton: {fileID: 985905273}
+  buttonManager: {fileID: 0}
   timeText: {fileID: 1442603990}
 --- !u!114 &1442603990
 MonoBehaviour:
