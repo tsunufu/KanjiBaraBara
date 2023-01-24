@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.IO;
 using System.Linq;
+using DG.Tweening;
 
 public class Question : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Question : MonoBehaviour
 
     private List<string> kannji = new List<string>();
 
+    [SerializeField] private List<Transform> cellPivots;
     [SerializeField] private List<Cell> cells;
 
     private Cell cell;
@@ -66,16 +68,23 @@ public class Question : MonoBehaviour
         //cellsの数(9回)だけforeachを回してあげて，textにstrの値を代入
         foreach(var c in cells)
         {
-            c.SetText(str);
+            c.Initialize(str, Hint);
             c.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         }
         //shuffle
-        for (int i = 0; i < 50; i++)
+        var shuffle = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+        shuffle = shuffle.OrderBy(a => System.Guid.NewGuid()).ToList();
+        //for (int i = 0; i < 50; i++)
+        //{
+        //    //ランダムで選ばれたcellを先頭に持ってくるという作業を50回繰り返してシャッフル
+        //    cells[Random.Range(0, cells.Count)].transform.SetAsFirstSibling();
+        //}
+        for (int i = 0; i < cells.Count; i++)
         {
-            //ランダムで選ばれたcellを先頭に持ってくるという作業を50回繰り返してシャッフル
-            cells[Random.Range(0, cells.Count)].transform.SetAsFirstSibling();
+            cells[i].SetCurrentPosition(shuffle[i], cellPivots[shuffle[i]]);
         }
         Debug.Log(str);
+
         
     }
     //StartButtonから参照したかったのでpublicに
@@ -88,17 +97,28 @@ public class Question : MonoBehaviour
             }
         */
 
+        //cell移動のアニメーション
+        //Scaleは変更できるが，GridLayoutGroupによってPositionが変更できなくなってしまっている
+        //cells[0].GetComponent<RectTransform>().DOScale(new Vector3(2f, 2f), 3f);
+
         //cellの並び順を正しい順番に
-        for(int i = 0; i < 9; i++)
+        for (int i = 0; i < cells.Count; i++)
         {
             //SetSiblingIndexで指定したインデックスを指定
             //0から順番に昇順にソートしているので一度並べた位置が動くことはない
-            cells[i].transform.SetSiblingIndex(i);
+            //cells[i].transform.SetSiblingIndex(i);
+            cells[i].SetCorrectPositionWithAnim(i, cellPivots[i]);
         }
     }
 
-    public void Hint(BaseEventData data)
+    public void Hint(Cell cell)
     {
+        var changeCell = cells.Find(c => c.CurrentPosition == cell.Index);
+        changeCell.SetCurrentPositionWithAnim(cell.CurrentPosition, cellPivots[cell.CurrentPosition]);
+        cell.SetCurrentPositionWithAnim(cell.Index, cellPivots[cell.Index]);
+
+
+        /*
         //クリックしたゲームオブジェクトを取得
         GameObject pointerObject = (data as PointerEventData).pointerClick;
         Debug.Log(pointerObject.name);
@@ -122,5 +142,6 @@ public class Question : MonoBehaviour
         cells[i].transform.SetSiblingIndex(k);
         //セルの色を変更
         cells[j].GetComponent<Image>().color = new Color32(154, 205, 50, 255);
+        */
     }
 }
