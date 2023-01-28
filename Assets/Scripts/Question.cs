@@ -108,7 +108,10 @@ public class Question : MonoBehaviour
             //0から順番に昇順にソートしているので一度並べた位置が動くことはない
             //cells[i].transform.SetSiblingIndex(i);
             cells[i].SetCorrectPositionWithAnim(i, cellPivots[i]);
+
+            Destroy(cells[i].GetComponent<Button>());
         }
+
     }
 
     public void Hint(Cell cell)

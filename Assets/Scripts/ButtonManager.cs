@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ButtonManager : MonoBehaviour
 {
     public Question question;
+    public Cell cell;
     public GameObject hanteiImage;
     public TextFieldScript textFieldScript;
     public Text nextText;
@@ -66,6 +67,7 @@ public class ButtonManager : MonoBehaviour
             case true:
                 hanteiImage.SetActive(false);
                 //新しい問題に
+                //cell.Next();
                 question.SetQuestion();
                 nextText.text = "答えを見る";
                 seikai = false;

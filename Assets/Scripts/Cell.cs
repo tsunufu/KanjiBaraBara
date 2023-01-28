@@ -39,6 +39,7 @@ public class Cell : MonoBehaviour
         {
             onClick(this);
         });
+
     }
 
     public void SetCurrentPosition(int position, Transform parent)
@@ -60,6 +61,12 @@ public class Cell : MonoBehaviour
         currentPosition = correctIndex;
         transform.SetParent(parent);
         transform.DOLocalMove(Vector3.zero, 0.3f);
+    }
+
+    //次の問題へいく際にButtonコンポーネントを削除
+    public void Next()
+    {
+        Destroy(gameObject.GetComponent<Button>());
     }
 
 
