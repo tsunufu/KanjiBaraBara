@@ -14,10 +14,6 @@ public class Question : MonoBehaviour
     //CSVの中身を入れるリスト
     List<string[]> kannjiDatas = new List<string[]>();
 
-    //private List<string> characters = new List<string>() { "青", "色", "有", "月" };
-
-    private List<string> kannji = new List<string>();
-
     [SerializeField] private List<Transform> cellPivots;
     [SerializeField] private List<Cell> cells;
 
@@ -27,6 +23,9 @@ public class Question : MonoBehaviour
     //判定用テキスト
     private string answerLabel;
     public string AnswerLabel => answerLabel;
+    //学年を入れるためのテキスト
+    private string grade;
+    public string Grade => grade;
 
     private GameObject cellName;
 
@@ -47,13 +46,6 @@ public class Question : MonoBehaviour
             kannjiDatas.Add(line.Split(','));
         }
 
-        //配列に漢字のデータを追加
-        for(int i= 1; i < kannjiDatas.Count; i++)
-        {
-            kannji.Add(kannjiDatas[i][0]);
-        }
-        //"一"が出力されれば成功
-        Debug.Log(kannji[0]);
 
         //開始時にも問題読み込み
         SetQuestion();
@@ -62,7 +54,10 @@ public class Question : MonoBehaviour
     public void SetQuestion()
     {
         //ランダムに一つ漢字を選ぶ
-        var str = kannji[Random.Range(0, kannji.Count)];
+        var random = Random.Range(1, kannjiDatas.Count);
+        var str = kannjiDatas[random][0];
+        var year = kannjiDatas[random][4];
+        grade = year;
         //判定用
         answerLabel = str;
         //cellsの数(9回)だけforeachを回してあげて，textにstrの値を代入

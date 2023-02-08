@@ -12,6 +12,10 @@ public class ButtonManager : MonoBehaviour
     public TextFieldScript textFieldScript;
     public Text nextText;
     public static bool seikai;
+    //図鑑に記録する用のList
+    private static List<List<string>> zukan = new List<List<string>>();
+    public static List<List<string>> Zukan => zukan;
+
 
     [SerializeField] private Button AnswerButton;
 
@@ -47,6 +51,11 @@ public class ButtonManager : MonoBehaviour
         {
             Debug.Log("正解");
             seikai = true;
+            //図鑑に漢字を登録する
+            List<string> Datas = new List<string>();
+            Datas.Add(question.Grade);
+            Datas.Add(question.AnswerLabel);
+            zukan.Add(Datas);
         }
         if (seikai)
         {
@@ -81,6 +90,8 @@ public class ButtonManager : MonoBehaviour
                 break;
 
         }
+        Debug.Log("漢字図鑑の中身は" + zukan[0][1]);
+        Debug.Log(zukan[0][0]);
 
     }
 
